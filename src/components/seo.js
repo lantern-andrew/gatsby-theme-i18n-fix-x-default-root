@@ -1,7 +1,7 @@
-import * as React from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql, withPrefix } from "gatsby"
-import { useLocalization } from "../hooks/use-localization"
+import * as React from 'react'
+import { Helmet } from 'react-helmet'
+import { useStaticQuery, graphql, withPrefix } from 'gatsby'
+import { useLocalization } from '../hooks/use-localization'
 
 const SEO = ({ location, pageContext }) => {
   const { locale, config, defaultLang } = useLocalization()
@@ -20,9 +20,15 @@ const SEO = ({ location, pageContext }) => {
   return (
     <Helmet>
       <html lang={locale} />
-      <link rel="alternate" hrefLang="x-default" href={`${defaultSiteUrl}/en${pageContext.originalPath}`} />
       <link
-        rel="alternate"
+        rel='alternate'
+        hrefLang='x-default'
+        href={`${defaultSiteUrl}${
+          pageContext.originalPath === '/' ? '' : pageContext.originalPath
+        }`}
+      />
+      <link
+        rel='alternate'
         hrefLang={pageContext.hrefLang}
         href={`${defaultSiteUrl}${
           pathname === withPrefix(`/`) ? `` : pathname
@@ -48,14 +54,14 @@ const SEO = ({ location, pageContext }) => {
         return (
           <link
             key={l.code}
-            rel="alternate"
+            rel='alternate'
             hrefLang={l.hrefLang}
             href={href}
           />
         )
       })}
       <meta
-        property="og:locale"
+        property='og:locale'
         content={pageContext.hrefLang.replace(`-`, `_`)}
       />
       {config.map((l) => {
@@ -63,7 +69,7 @@ const SEO = ({ location, pageContext }) => {
         return (
           <meta
             key={l.code}
-            property="og:locale:alternate"
+            property='og:locale:alternate'
             content={l.hrefLang.replace(`-`, `_`)}
           />
         )
